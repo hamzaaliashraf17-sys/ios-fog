@@ -1,7 +1,7 @@
 diff --git a/bsd/dev/sweet_touch.c b/bsd/dev/sweet_touch.c
 --- a/bsd/dev/sweet_touch.c
 +++ b/bsd/dev/sweet_touch.c
-@@ -1,1 +1,73 @@
+@@ -97,1 +97,73 @@
  #define NVT_PAGE_COUNT        4u
 +
 +/* FocalTech fog (220333QAG): FT8632, ID 0x8632. No pages like Novatek.
@@ -75,11 +75,11 @@ diff --git a/bsd/dev/sweet_touch.c b/bsd/dev/sweet_touch.c
 +       touch_report(mask, x, y);
 +       return 0;
 +}
-@@ -1,2 +1,3 @@
+@@ -924,2 +924,3 @@
  touch_fog_fwinfo(void)
  {
 +       if (touch_fog_fts_probe()) return true;
-@@ -1,2 +1,3 @@
+@@ -975,2 +975,3 @@
  touch_fog_report(void)
  {
 +       if (fog_is_fts) return touch_fog_fts_report();
