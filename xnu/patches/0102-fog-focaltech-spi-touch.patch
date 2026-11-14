@@ -1,8 +1,10 @@
 diff --git a/bsd/dev/sweet_touch.c b/bsd/dev/sweet_touch.c
 --- a/bsd/dev/sweet_touch.c
 +++ b/bsd/dev/sweet_touch.c
-@@ -60,1 +60,73 @@
+@@ -96,3 +96,75 @@
  #define NVT_PAGE_COUNT        4u
+ #define NVT_SWRST_N8_ADDR     0x3f0feu
+ #define TOUCH_FTS        2
 +
 +/* FocalTech fog (220333QAG): FT8632, ID 0x8632. No pages like Novatek.
 + * Chip ID: reg 0xA3 = 0x86, reg 0x9F = 0x32. Touch data: reg 0x00. */
@@ -75,14 +77,14 @@ diff --git a/bsd/dev/sweet_touch.c b/bsd/dev/sweet_touch.c
 +       touch_report(mask, x, y);
 +       return 0;
 +}
-@@ -140,5 +212,6 @@
+@@ -176,5 +248,6 @@
  /* Validate FWINFO at page+0x78 (fw_ver + ~fw_ver == 0xFF, sane panel). */
  static bool
  touch_fog_fwinfo(void)
  {
 +       if (touch_fog_fts_probe()) return true;
         uint8_t buf[17];
-@@ -200,5 +273,6 @@
+@@ -236,5 +309,6 @@
  /* 65-byte EVENT_BUF frame: ten 6-byte records, id in bits 7:3, type 1/2=down. */
  static int
  touch_fog_report(void)
